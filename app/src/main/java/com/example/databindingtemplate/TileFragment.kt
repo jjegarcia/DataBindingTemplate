@@ -26,18 +26,3 @@ class TileFragment : Fragment() {
 
 
 }
-//override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-//    vehicleHealthViewModel = viewModelProvider(viewModelFactory)
-//
-//    observeVehicleHealthItemsUpdates()
-//    observeNoVehicleConnectivityNotification()
-//    configureVehicleHealthItemClickListeners()
-//
-//    return FragmentVehicleHealthBinding.inflate(inflater, container, false).apply {
-//        lifecycleOwner = this@VehicleHealthFragment
-//        viewModel = vehicleHealthViewModel
-//        adapter = vehicleHealthAdapter
-//        isHeaderLoading = _isHeaderLoading
-//        addVehicleSummaryHeaderFragment(this)
-//    }.root
-//}
