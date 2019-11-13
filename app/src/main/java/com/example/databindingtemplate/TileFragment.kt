@@ -17,12 +17,9 @@ class TileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
- //       return inflater.inflate(R.layout.fragment_tile, container, false)
         return FragmentTileBinding.inflate(inflater,container,false).apply {
             viewModel=TileVM()
         }.root
     }
-
 
 }
