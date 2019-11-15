@@ -53,14 +53,6 @@ class MainActivity : AppCompatActivity() {
         cardList.add(card2)//1
         cardList.add(card2)//1
         cardList.add(card3)//1
-        cardList.add(card3)//1
-        cardList.add(card3)//1
-        cardList.add(card3)//1
-        cardList.add(card3)//1
-        cardList.add(card3)//1
-        cardList.add(card3)//1
-        cardList.add(card3)//1
-        cardList.add(card3)//1
 
 
         val adapter = Adapter(cardList)
@@ -69,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.adapter=adapter
 
-       val manager = GridLayoutManager(this, 5, GridLayoutManager.VERTICAL, false)
+       val manager = GridLayoutManager(this, 4, GridLayoutManager.VERTICAL, false)
 
                recyclerView.layoutManager = manager
 
