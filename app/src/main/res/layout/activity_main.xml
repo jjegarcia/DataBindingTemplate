@@ -5,9 +5,9 @@
     <data>
 
 
-        <variable
-            name="viewModel"
-            type="com.example.databindingtemplate.VM"/>
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.example.databindingtemplate.VM"/>-->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
