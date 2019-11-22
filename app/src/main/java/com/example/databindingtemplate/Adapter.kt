@@ -7,7 +7,8 @@ import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
-class Adapter(val list: ArrayList<Card>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
+class Adapter(val list: Board) : RecyclerView.Adapter<Adapter.ViewHolder>() {
+//    class Adapter(val list: ArrayList<Card>) : RecyclerView.Adapter<com.example.databindingtemplate.Adapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_tile, parent, false)
@@ -19,12 +20,12 @@ class Adapter(val list: ArrayList<Card>) : RecyclerView.Adapter<Adapter.ViewHold
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return list.boardArray.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.cardImageView.setImageDrawable(ContextCompat.getDrawable(holder.cardImageView.context, list[position].sourceName))
+        holder.cardImageView.setImageDrawable(ContextCompat.getDrawable(holder.cardImageView.context, list.boardArray[position].card.frontImage.imageNumber))
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

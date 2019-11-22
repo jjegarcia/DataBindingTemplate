@@ -7,8 +7,8 @@
 
      <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
          android:id="@+id/card_image"
-        android:layout_width="84dp"
-        android:layout_height="84dp"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
         android:paddingLeft="12dp"
         tools:srcCompat="@tools:sample/avatars" >
 </ImageView>

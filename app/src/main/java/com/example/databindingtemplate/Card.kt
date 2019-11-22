@@ -1,6 +1,7 @@
 package com.example.databindingtemplate
 
 data class Card constructor(
-    val title: String,
-    var sourceName: Int
+    val key: Int,
+    val frontImage: frontImages,
+    val backImage: backImages
 )
