@@ -11,10 +11,13 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        val cardsList = createList()
-        val newBoard = Board(cardsList)
-        val game= Game(newBoard)
+        val initialCardsList = createList()
+
+        val cardList=initialCardsList.shuffled()
+
+        val newBoard = Board(cardList)
         buildBoard(newBoard)
+
 
     }
 
