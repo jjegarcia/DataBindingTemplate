@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun buildBoard(cardList: Board) {
-        val adapter = Adapter(cardList)
+        val adapter = CardBoardAdapter(cardList)
 
         val recyclerView = findViewById(R.id.Recycler) as RecyclerView
 

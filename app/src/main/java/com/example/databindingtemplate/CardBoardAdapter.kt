@@ -1,5 +1,6 @@
 package com.example.databindingtemplate
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,8 +8,8 @@ import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
-class Adapter(val list: Board) : RecyclerView.Adapter<Adapter.ViewHolder>() {
-//    class Adapter(val list: ArrayList<Card>) : RecyclerView.Adapter<com.example.databindingtemplate.Adapter.ViewHolder>() {
+class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.ViewHolder>() {
+//    class CardBoardAdapter(val list: ArrayList<Card>) : RecyclerView.CardBoardAdapter<com.example.databindingtemplate.CardBoardAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_tile, parent, false)
@@ -25,7 +26,21 @@ class Adapter(val list: Board) : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.cardImageView.setImageDrawable(ContextCompat.getDrawable(holder.cardImageView.context, list.boardArray[position].card.frontImage.imageNumber))
+        holder.cardImageView.apply {
+            setImageDrawable(
+                ContextCompat.getDrawable(
+                    holder.cardImageView.context,
+                    list.boardArray[position].card.frontImage.imageNumber
+                )
+            )
+
+
+        }
+        holder.itemView.setOnClickListener(object: View.OnClickListener {
+            override fun onClick(v: View?) {
+                Log.i("VS", "Card " + list.boardArray[position].card.key)
+            }
+        })
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -38,5 +53,6 @@ class Adapter(val list: Board) : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
 //        val cardImageView=itemView.findViewById(R.id.card_image) as ImageView
     }
+
 
 }
