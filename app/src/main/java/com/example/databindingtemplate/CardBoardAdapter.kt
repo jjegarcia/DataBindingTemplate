@@ -39,6 +39,14 @@ class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.
         holder.itemView.setOnClickListener(object: View.OnClickListener {
             override fun onClick(v: View?) {
                 Log.i("VS", "Card " + list.boardArray[position].card.key)
+                holder.cardImageView.apply{
+                    setImageDrawable(
+                        ContextCompat.getDrawable(
+                            holder.cardImageView.context,
+                            list.boardArray[position].card.backImage.imageNumber
+                        )
+                    )
+                }
             }
         })
     }
