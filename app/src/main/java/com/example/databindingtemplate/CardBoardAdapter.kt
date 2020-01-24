@@ -25,7 +25,27 @@ class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        setImage(holder, position)
+        holder.itemView.setOnClickListener(object: View.OnClickListener {
+            override fun onClick(v: View?) {
+                flipCard()
+            }
 
+            private fun flipCard() {
+                Log.i("VS", "Card " + list.boardArray[position].card.key)
+                val apply = holder.cardImageView.apply {
+                    setImageDrawable(
+                        ContextCompat.getDrawable(
+                            holder.cardImageView.context,
+                            list.boardArray[position].card.backImage.imageNumber
+                        )
+                    )
+                }
+            }
+        })
+    }
+
+    private fun setImage(holder: ViewHolder, position: Int) {
         holder.cardImageView.apply {
             setImageDrawable(
                 ContextCompat.getDrawable(
@@ -36,19 +56,6 @@ class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.
 
 
         }
-        holder.itemView.setOnClickListener(object: View.OnClickListener {
-            override fun onClick(v: View?) {
-                Log.i("VS", "Card " + list.boardArray[position].card.key)
-                holder.cardImageView.apply{
-                    setImageDrawable(
-                        ContextCompat.getDrawable(
-                            holder.cardImageView.context,
-                            list.boardArray[position].card.backImage.imageNumber
-                        )
-                    )
-                }
-            }
-        })
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
