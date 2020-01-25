@@ -37,12 +37,23 @@ class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.
                     setImageDrawable(
                         ContextCompat.getDrawable(
                             holder.cardImageView.context,
-                            list.boardArray[position].card.backImage.imageNumber
+                            flip(position)
                         )
                     )
                 }
             }
         })
+    }
+
+    private fun flip(position: Int) :Int {
+        val flipImage :Int
+        val imageFlipped=list.boardArray[position].card.flipped
+         if (imageFlipped)
+             flipImage =  list.boardArray[position].card.frontImage.imageNumber
+        else
+             flipImage = list.boardArray[position].card.backImage.imageNumber
+        list.boardArray[position].card.flipped = !imageFlipped
+        return flipImage
     }
 
     private fun setImage(holder: ViewHolder, position: Int) {

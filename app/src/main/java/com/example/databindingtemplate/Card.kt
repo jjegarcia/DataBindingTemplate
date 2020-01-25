@@ -4,7 +4,7 @@ data class Card constructor(
     val key: Int,
     val frontImage: frontImages,
     val backImage: backImages,
-    val flipped :Boolean
+    var flipped :Boolean
     //,
 
 
