@@ -35,7 +35,7 @@ class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.
 
     private fun flipCard(position: Int, holder: ViewHolder) {
         Log.i("VS", "Card " + list.boardArray[position].card.key)
-        val apply = holder.cardImageView.apply {
+        holder.cardImageView.apply {
             setImageDrawable(
                 ContextCompat.getDrawable(
                     holder.cardImageView.context,
