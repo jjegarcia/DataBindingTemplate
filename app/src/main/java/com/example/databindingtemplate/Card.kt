@@ -5,7 +5,7 @@ data class Card constructor(
     val frontImage: frontImages,
     val backImage: backImages,
     var flipped: Boolean,
-    var clickable: Boolean = false
+    var clickable: Boolean = true
 
 
 //    val imageResId: Int,

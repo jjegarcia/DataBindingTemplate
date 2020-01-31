@@ -1,19 +1,23 @@
 package com.example.databindingtemplate
 
-import android.util.Log
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import androidx.core.os.postDelayed
+import androidx.databinding.adapters.ImageViewBindingAdapter.setImageDrawable
 import androidx.recyclerview.widget.RecyclerView
 
 class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.ViewHolder>() {
-//    class CardBoardAdapter(val list: ArrayList<Card>) : RecyclerView.CardBoardAdapter<com.example.databindingtemplate.CardBoardAdapter.ViewHolder>() {
+    //    class CardBoardAdapter(val list: ArrayList<Card>) : RecyclerView.CardBoardAdapter<com.example.databindingtemplate.CardBoardAdapter.ViewHolder>() {
+    var firstMove: Boolean = true
+    var lastCard: Card?=null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_tile, parent, false)
-        return ViewHolder(v)
+        return RecyclerView.ViewHolder(v)
     }
 
     fun setData() {
@@ -24,17 +28,17 @@ class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.
         return list.boardArray.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         setImage(holder, position)
         holder.itemView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                if (list.boardArray[position].card.clickable) flipCard(position, holder)
+                if (list.boardArray[position].card.clickable) checkMove(holder, position)
             }
         })
     }
 
-    private fun flipCard(position: Int, holder: ViewHolder) {
- //       Log.i("VS", "Card " + list.boardArray[position].card.key)
+    private fun flipCard(position: Int, holder: RecyclerView.ViewHolder) {
+        //       Log.i("VS", "Card " + list.boardArray[position].card.key)
 
         holder.cardImageView.apply {
             setImageDrawable(
@@ -49,15 +53,13 @@ class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.
     private fun flip(position: Int): Int {
         val flipImage: Int
         val imageFlipped = list.boardArray[position].card.flipped
-        if (imageFlipped)
-            flipImage = list.boardArray[position].card.frontImage.imageNumber
-        else
-            flipImage = list.boardArray[position].card.backImage.imageNumber
+        if (imageFlipped) flipImage = list.boardArray[position].card.frontImage.imageNumber
+        else flipImage = list.boardArray[position].card.backImage.imageNumber
         list.boardArray[position].card.flipped = !imageFlipped
         return flipImage
     }
 
-    private fun setImage(holder: ViewHolder, position: Int) {
+    private fun setImage(holder: RecyclerView.ViewHolder, position: Int) {
         holder.cardImageView.apply {
             setImageDrawable(
                 ContextCompat.getDrawable(
@@ -65,7 +67,23 @@ class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.
                     list.boardArray[position].card.frontImage.imageNumber
                 )
             )
+        }
+    }
 
+    private fun checkMove(holder: RecyclerView.ViewHolder, position: Int) {
+        if (firstMove) {
+            flipCard(position, holder)
+        }
+        else {
+            if (list.boardArray[position].card.key==lastCard?.key){
+                lastCard?.clickable=false
+                list.boardArray[position].card.clickable=false
+            }
+        }
+        !firstMove
+        lastCard=list.boardArray[position].card
+        val handler= Handler()
+        handler.postDelayed(2000){
 
         }
     }
