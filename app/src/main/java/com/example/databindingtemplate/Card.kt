@@ -4,10 +4,8 @@ data class Card constructor(
     val key: Int,
     val frontImage: frontImages,
     val backImage: backImages,
-    var flipped :Boolean
-    //,
-
-
+    var flipped: Boolean,
+    var clickable: Boolean = true
 
 
 //    val imageResId: Int,

@@ -16,7 +16,7 @@ class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.
         return ViewHolder(v)
     }
 
-    fun setData(){
+    fun setData() {
         notifyDataSetChanged()
     }
 
@@ -26,32 +26,32 @@ class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         setImage(holder, position)
-        holder.itemView.setOnClickListener(object: View.OnClickListener {
+        holder.itemView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                flipCard()
-            }
-
-            private fun flipCard() {
-                Log.i("VS", "Card " + list.boardArray[position].card.key)
-                val apply = holder.cardImageView.apply {
-                    setImageDrawable(
-                        ContextCompat.getDrawable(
-                            holder.cardImageView.context,
-                            flip(position)
-                        )
-                    )
-                }
+                flipCard(position, holder)
             }
         })
     }
 
-    private fun flip(position: Int) :Int {
-        val flipImage :Int
-        val imageFlipped=list.boardArray[position].card.flipped
-         if (imageFlipped)
-             flipImage =  list.boardArray[position].card.frontImage.imageNumber
+    private fun flipCard(position: Int, holder: ViewHolder) {
+        Log.i("VS", "Card " + list.boardArray[position].card.key)
+        val apply = holder.cardImageView.apply {
+            setImageDrawable(
+                ContextCompat.getDrawable(
+                    holder.cardImageView.context,
+                    flip(position)
+                )
+            )
+        }
+    }
+
+    private fun flip(position: Int): Int {
+        val flipImage: Int
+        val imageFlipped = list.boardArray[position].card.flipped
+        if (imageFlipped)
+            flipImage = list.boardArray[position].card.frontImage.imageNumber
         else
-             flipImage = list.boardArray[position].card.backImage.imageNumber
+            flipImage = list.boardArray[position].card.backImage.imageNumber
         list.boardArray[position].card.flipped = !imageFlipped
         return flipImage
     }
@@ -79,6 +79,5 @@ class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.
 
 //        val cardImageView=itemView.findViewById(R.id.card_image) as ImageView
     }
-
 
 }
