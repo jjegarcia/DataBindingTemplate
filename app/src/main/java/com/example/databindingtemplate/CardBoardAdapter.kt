@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 class CardBoardAdapter(
     val list: Board,
     var firstMove: Boolean = true,
-    var lastCard: Card? = null
+    var lastCard: Card? = null,
+    var lastCardPostion: Int=0
 ) : RecyclerView.Adapter<CardBoardAdapter.ViewHolder>() {
 //    class CardBoardAdapter(val list: ArrayList<Card>) : RecyclerView.CardBoardAdapter<com.example.databindingtemplate.CardBoardAdapter.ViewHolder>() {
 
@@ -70,20 +71,28 @@ class CardBoardAdapter(
             if (list.boardArray[position].card.key == lastCard?.key) {
                 matchedCard=true
             }
+            if(matchedCard){
+                list.boardArray[position].card.clickable = false
+                lastCard?.clickable = false
+            }
+            else{
+                //flip the card---wait--to do flip both cards
+                flipCard(holder,position)
+                val handler = Handler()
+                handler.postDelayed(5000) {
+
+                }
+                flipCard(holder,position)
+                flipCard(holder,lastCardPostion)
+
+            }
         }
+        firstMove=!firstMove
         if (list.boardArray[position].card.clickable) {
             flipCard(holder, position)
         }
-        if(matchedCard){
-            list.boardArray[position].card.clickable = false
-            lastCard?.clickable = false
-        }
-        firstMove=!firstMove
         lastCard = list.boardArray[position].card
-        val handler = Handler()
-        handler.postDelayed(2000) {
-
-        }
+        lastCardPostion=position
     }
 
     private fun setImage(holder: ViewHolder, position: Int) {
