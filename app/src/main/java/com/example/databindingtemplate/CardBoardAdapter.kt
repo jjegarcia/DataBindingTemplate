@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CardBoardAdapter(
     val list: Board,
-    val firstMove: Boolean = true,
+    var firstMove: Boolean = true,
     var lastCard: Card? = null
 ) : RecyclerView.Adapter<CardBoardAdapter.ViewHolder>() {
 //    class CardBoardAdapter(val list: ArrayList<Card>) : RecyclerView.CardBoardAdapter<com.example.databindingtemplate.CardBoardAdapter.ViewHolder>() {
@@ -64,15 +64,21 @@ class CardBoardAdapter(
     }
 
     private fun checkMove(holder: ViewHolder, position: Int) {
+        var matchedCard: Boolean =false
         if (firstMove) {
-            flipCard(holder , position)
         } else {
             if (list.boardArray[position].card.key == lastCard?.key) {
-                lastCard?.clickable = false
-                list.boardArray[position].card.clickable = false
+                matchedCard=true
             }
         }
-        !firstMove
+        if (list.boardArray[position].card.clickable) {
+            flipCard(holder, position)
+        }
+        if(matchedCard){
+            list.boardArray[position].card.clickable = false
+            lastCard?.clickable = false
+        }
+        firstMove=!firstMove
         lastCard = list.boardArray[position].card
         val handler = Handler()
         handler.postDelayed(2000) {
