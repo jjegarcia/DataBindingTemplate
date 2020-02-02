@@ -28,14 +28,13 @@ class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.
         setImage(holder, position)
         holder.itemView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                if (list.boardArray[position].card.clickable) flipCard(position, holder)
+                flipCard(position, holder)
             }
         })
     }
 
     private fun flipCard(position: Int, holder: ViewHolder) {
- //       Log.i("VS", "Card " + list.boardArray[position].card.key)
-
+        Log.i("VS", "Card " + list.boardArray[position].card.key)
         holder.cardImageView.apply {
             setImageDrawable(
                 ContextCompat.getDrawable(
