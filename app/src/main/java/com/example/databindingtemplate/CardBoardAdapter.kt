@@ -1,14 +1,20 @@
 package com.example.databindingtemplate
 
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import androidx.core.os.postDelayed
 import androidx.recyclerview.widget.RecyclerView
 
-class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.ViewHolder>() {
+class CardBoardAdapter(
+    val list: Board,
+    val firstMove: Boolean = true,
+    var lastCard: Card? = null
+) : RecyclerView.Adapter<CardBoardAdapter.ViewHolder>() {
 //    class CardBoardAdapter(val list: ArrayList<Card>) : RecyclerView.CardBoardAdapter<com.example.databindingtemplate.CardBoardAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,12 +34,13 @@ class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.
         setImage(holder, position)
         holder.itemView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                flipCard(position, holder)
+                //               flipCard(holder,position)
+                checkMove(holder,position)
             }
         })
     }
 
-    private fun flipCard(position: Int, holder: ViewHolder) {
+    private fun flipCard(holder: ViewHolder, position: Int) {
         Log.i("VS", "Card " + list.boardArray[position].card.key)
         holder.cardImageView.apply {
             setImageDrawable(
@@ -54,6 +61,23 @@ class CardBoardAdapter(val list: Board) : RecyclerView.Adapter<CardBoardAdapter.
             flipImage = list.boardArray[position].card.backImage.imageNumber
         list.boardArray[position].card.flipped = !imageFlipped
         return flipImage
+    }
+
+    private fun checkMove(holder: ViewHolder, position: Int) {
+        if (firstMove) {
+            flipCard(holder , position)
+        } else {
+            if (list.boardArray[position].card.key == lastCard?.key) {
+                lastCard?.clickable = false
+                list.boardArray[position].card.clickable = false
+            }
+        }
+        !firstMove
+        lastCard = list.boardArray[position].card
+        val handler = Handler()
+        handler.postDelayed(2000) {
+
+        }
     }
 
     private fun setImage(holder: ViewHolder, position: Int) {
