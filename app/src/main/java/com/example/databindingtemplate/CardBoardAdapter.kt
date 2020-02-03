@@ -11,7 +11,7 @@ import androidx.core.os.postDelayed
 import androidx.recyclerview.widget.RecyclerView
 
 class CardBoardAdapter(
-    val list: Board,
+    val list: List<Card>,
     var firstMove: Boolean = true,
     var lastCard: Card? = null,
     var lastCardPostion: Int=0
@@ -28,7 +28,7 @@ class CardBoardAdapter(
     }
 
     override fun getItemCount(): Int {
-        return list.boardArray.size
+        return list.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -42,7 +42,7 @@ class CardBoardAdapter(
     }
 
     private fun flipCard(holder: ViewHolder, position: Int) {
-        Log.i("VS", "Card " + list.boardArray[position].card.key)
+        Log.i("VS", "Card " + list[position].key)
         holder.cardImageView.apply {
             setImageDrawable(
                 ContextCompat.getDrawable(
@@ -55,12 +55,12 @@ class CardBoardAdapter(
 
     private fun flip(position: Int): Int {
         val flipImage: Int
-        val imageFlipped = list.boardArray[position].card.flipped
+        val imageFlipped = list[position].flipped
         if (imageFlipped)
-            flipImage = list.boardArray[position].card.frontImage.imageNumber
+            flipImage = list[position].frontImage.imageNumber
         else
-            flipImage = list.boardArray[position].card.backImage.imageNumber
-        list.boardArray[position].card.flipped = !imageFlipped
+            flipImage = list[position].backImage.imageNumber
+        list[position].flipped = !imageFlipped
         return flipImage
     }
 
@@ -68,11 +68,11 @@ class CardBoardAdapter(
         var matchedCard: Boolean =false
         if (firstMove) {
         } else {
-            if (list.boardArray[position].card.key == lastCard?.key) {
+            if (list[position].key == lastCard?.key) {
                 matchedCard=true
             }
             if(matchedCard){
-                list.boardArray[position].card.clickable = false
+                list[position].clickable = false
                 lastCard?.clickable = false
             }
             else{
@@ -88,10 +88,10 @@ class CardBoardAdapter(
             }
         }
         firstMove=!firstMove
-        if (list.boardArray[position].card.clickable) {
+        if (list[position].clickable) {
             flipCard(holder, position)
         }
-        lastCard = list.boardArray[position].card
+        lastCard = list[position]
         lastCardPostion=position
     }
 
@@ -100,7 +100,7 @@ class CardBoardAdapter(
             setImageDrawable(
                 ContextCompat.getDrawable(
                     holder.cardImageView.context,
-                    list.boardArray[position].card.frontImage.imageNumber
+                    list[position].frontImage.imageNumber
                 )
             )
 

@@ -15,58 +15,57 @@ class MainActivity : AppCompatActivity() {
 
         val cardList=initialCardsList.shuffled()
 
-        val newBoard = Board(cardList)
-        buildBoard(newBoard)
+//        val newBoard = Board(cardList)
+        buildBoard(cardList)
 
 
     }
 
-    fun createList(): List<CardPair> {
-        return listOf<CardPair>(
-            CardPair(validCards.E1.cardName, false),
-            CardPair(validCards.E2.cardName, false),
-            CardPair(validCards.E3.cardName, false),
-            CardPair(validCards.E4.cardName, false),
-            CardPair(validCards.E5.cardName, false),
-            CardPair(validCards.E6.cardName, false),
-            CardPair(validCards.E7.cardName, false),
-            CardPair(validCards.E8.cardName, false),
-            CardPair(validCards.E9.cardName, false),
-            CardPair(validCards.E10.cardName, false),
-            CardPair(validCards.E11.cardName, false),
-            CardPair(validCards.E12.cardName, false),
-            CardPair(validCards.E13.cardName, false),
-            CardPair(validCards.E14.cardName, false),
-            CardPair(validCards.E15.cardName, false),
-            CardPair(validCards.E16.cardName, false),
-
-            CardPair(validCards.E1.cardName, false),
-            CardPair(validCards.E2.cardName, false),
-            CardPair(validCards.E3.cardName, false),
-            CardPair(validCards.E4.cardName, false),
-            CardPair(validCards.E5.cardName, false),
-            CardPair(validCards.E6.cardName, false),
-            CardPair(validCards.E7.cardName, false),
-            CardPair(validCards.E8.cardName, false),
-            CardPair(validCards.E9.cardName, false),
-            CardPair(validCards.E10.cardName, false),
-            CardPair(validCards.E11.cardName, false),
-            CardPair(validCards.E12.cardName, false),
-            CardPair(validCards.E13.cardName, false),
-            CardPair(validCards.E14.cardName, false),
-            CardPair(validCards.E15.cardName, false),
-            CardPair(validCards.E16.cardName, false)
+    fun createList(): List<Card> {
+        return listOf<Card>(
+        Card(1,frontImages.AVATAR1,backImages.UNMATCHED,false),
+        Card(2,frontImages.AVATAR2,backImages.UNMATCHED,false),
+//        Card(3,frontImages.AVATAR3,backImages.UNMATCHED,false),
+//        Card(4,frontImages.AVATAR4,backImages.UNMATCHED,false),
+//        Card(5,frontImages.AVATAR5,backImages.UNMATCHED,false),
+//        Card(6,frontImages.AVATAR6,backImages.UNMATCHED,false),
+//        Card(7,frontImages.AVATAR7,backImages.UNMATCHED,false),
+//        Card(8,frontImages.AVATAR8,backImages.UNMATCHED,false),
+//        Card(9,frontImages.AVATAR9,backImages.UNMATCHED,false),
+//        Card(10,frontImages.AVATAR10,backImages.UNMATCHED,false),
+//        Card(11,frontImages.AVATAR11,backImages.UNMATCHED,false),
+//        Card(12,frontImages.AVATAR12,backImages.UNMATCHED,false),
+//        Card(13,frontImages.AVATAR13,backImages.UNMATCHED,false),
+//        Card(14,frontImages.AVATAR14,backImages.UNMATCHED,false),
+//        Card(15,frontImages.AVATAR15,backImages.UNMATCHED,false),
+//        Card(16,frontImages.AVATAR16,backImages.UNMATCHED,false),
+        Card(1,frontImages.AVATAR1,backImages.UNMATCHED,false),
+        Card(2,frontImages.AVATAR2,backImages.UNMATCHED,false)//,
+//        Card(3,frontImages.AVATAR3,backImages.UNMATCHED,false),
+//        Card(4,frontImages.AVATAR4,backImages.UNMATCHED,false),
+//        Card(5,frontImages.AVATAR5,backImages.UNMATCHED,false),
+//        Card(6,frontImages.AVATAR6,backImages.UNMATCHED,false),
+//        Card(7,frontImages.AVATAR7,backImages.UNMATCHED,false),
+//        Card(8,frontImages.AVATAR8,backImages.UNMATCHED,false),
+//        Card(9,frontImages.AVATAR9,backImages.UNMATCHED,false),
+//        Card(10,frontImages.AVATAR10,backImages.UNMATCHED,false),
+//        Card(11,frontImages.AVATAR11,backImages.UNMATCHED,false),
+//        Card(12,frontImages.AVATAR12,backImages.UNMATCHED,false),
+//        Card(13,frontImages.AVATAR13,backImages.UNMATCHED,false),
+//        Card(14,frontImages.AVATAR14,backImages.UNMATCHED,false),
+//        Card(15,frontImages.AVATAR15,backImages.UNMATCHED,false),
+//        Card(16,frontImages.AVATAR16,backImages.UNMATCHED,false)
         )
     }
 
-    private fun buildBoard(cardList: Board) {
+    private fun buildBoard(cardList: List<Card>) {
         val adapter = CardBoardAdapter(cardList)
 
         val recyclerView = findViewById(R.id.Recycler) as RecyclerView
 
         recyclerView.adapter = adapter
 
-        val manager = GridLayoutManager(this, 4, GridLayoutManager.VERTICAL, false)
+        val manager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
 
         recyclerView.layoutManager = manager
 

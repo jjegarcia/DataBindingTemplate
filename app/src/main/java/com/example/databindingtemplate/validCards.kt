@@ -3,7 +3,6 @@ package com.example.databindingtemplate
 enum class validCards(val cardName: Card) {
 
     E1   (Card(1,frontImages.AVATAR1,backImages.UNMATCHED,false)),
-
     E2   (Card(2,frontImages.AVATAR2,backImages.UNMATCHED,false)),
     E3   (Card(3,frontImages.AVATAR3,backImages.UNMATCHED,false)),
     E4   (Card(4,frontImages.AVATAR4,backImages.UNMATCHED,false)),
