@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 class CardBoardAdapter(
     val list: List<Card>
 ) : RecyclerView.Adapter<CardBoardAdapter.ViewHolder>() {
-//    class CardBoardAdapter(val list: ArrayList<Card>) : RecyclerView.CardBoardAdapter<com.example.databindingtemplate.CardBoardAdapter.ViewHolder>() {
     var firstMove: Boolean = true
     var lastCardHolder: ViewHolder?=null
     var lastCardPostion: Int = 0
@@ -36,7 +35,6 @@ class CardBoardAdapter(
         setImage(holder, position)
         holder.itemView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                //               flipCard(holder,position)
                 checkMove(holder, position)
             }
         })
@@ -52,7 +50,6 @@ class CardBoardAdapter(
                 )
             )
         }
-//        notifyDataSetChanged()
     }
 
     private fun flip(position: Int): Int {
@@ -68,17 +65,12 @@ class CardBoardAdapter(
 
     private fun checkMove(holder: ViewHolder, position: Int) {
         if (list[position].clickable) {
-            var matchedCard: Boolean = false
+            flipCard(holder, position)
             if (firstMove) {
-                flipCard(holder, position)
                 list[position].clickable=false
             } else {
                 if (list[position].key == lastCard?.key) {
-                    matchedCard = true
-                }
-                if (matchedCard) {
                     list[position].clickable = false
-                    lastCard?.clickable = false
                 } else {
                     //flip the card---wait-- flip both cards-make both back to clickable
                     list[position].clickable = true
@@ -88,7 +80,6 @@ class CardBoardAdapter(
                         flipCard(holder, position)
                     }
                     lastCardHolder?.let { flipCard(it, lastCardPostion) }
-                    flipCard(holder, position)
                 }
             }
             lastCardHolder = holder
@@ -101,27 +92,20 @@ class CardBoardAdapter(
     private fun setImage(holder: ViewHolder, position: Int) {
         holder.cardImageView.apply {
             setImageDrawable(
-//                if(holder.isFront) {  suggested
                 ContextCompat.getDrawable(
                     holder.cardImageView.context,
                     list[position].backImage.imageNumber
                 )
             )
-
-
         }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val cardImageView: ImageView
- //       var isFront = false  suggested
 
         init {
             cardImageView = itemView.findViewById(R.id.card_image)
         }
-
-//        val cardImageView=itemView.findViewById(R.id.card_image) as ImageView
     }
-
 }
