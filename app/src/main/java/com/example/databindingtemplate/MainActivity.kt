@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         val initialCardsList = createList()
 
-        val cardList=initialCardsList.shuffled()
+        val cardList=initialCardsList//.shuffled()
 
 //        val newBoard = Board(cardList)
         buildBoard(cardList)
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
 
-        val manager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
+        val manager = GridLayoutManager(this, 2)
 
         recyclerView.layoutManager = manager
 
