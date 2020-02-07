@@ -14,7 +14,7 @@ class CardBoardAdapter(
     val list: List<Card>
 ) : RecyclerView.Adapter<CardBoardAdapter.ViewHolder>() {
     var firstMove: Boolean = true
-    var lastCardHolder: ViewHolder?=null
+lateinit    var lastCardHolder: ViewHolder
     var lastCardPostion: Int = 0
     var lastCard: Card?=null
 
@@ -68,23 +68,22 @@ class CardBoardAdapter(
             flipCard(holder, position)
             if (firstMove) {
                 list[position].clickable=false
+                lastCardHolder = holder
+                lastCardPostion = position
+                lastCard=list[position]
             } else {
                 if (list[position].key == lastCard?.key) {
                     list[position].clickable = false
                 } else {
-                    //flip the card---wait-- flip both cards-make both back to clickable
                     list[position].clickable = true
                     lastCard?.clickable = true
                     val handler = Handler()
-                    handler.postDelayed(5000) {
+                    handler.postDelayed( {
                         flipCard(holder, position)
-                    }
-                    lastCardHolder?.let { flipCard(it, lastCardPostion) }
+                        flipCard(lastCardHolder, lastCardPostion)
+                    },3000)
                 }
             }
-            lastCardHolder = holder
-            lastCardPostion = position
-            lastCard=list[position]
             firstMove = !firstMove
         }
     }
@@ -107,5 +106,11 @@ class CardBoardAdapter(
         init {
             cardImageView = itemView.findViewById(R.id.card_image)
         }
+   fun test(){
+       val handler = Handler()
+               handler.postDelayed({
+               }, 350)
+           }
+
     }
 }
