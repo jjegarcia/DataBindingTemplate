@@ -25,36 +25,36 @@ class MainActivity : AppCompatActivity() {
         return listOf<Card>(
         Card(1,frontImages.AVATAR1,backImages.UNMATCHED,false),
         Card(2,frontImages.AVATAR2,backImages.UNMATCHED,false),
-//        Card(3,frontImages.AVATAR3,backImages.UNMATCHED,false),
-//        Card(4,frontImages.AVATAR4,backImages.UNMATCHED,false),
-//        Card(5,frontImages.AVATAR5,backImages.UNMATCHED,false),
-//        Card(6,frontImages.AVATAR6,backImages.UNMATCHED,false),
-//        Card(7,frontImages.AVATAR7,backImages.UNMATCHED,false),
-//        Card(8,frontImages.AVATAR8,backImages.UNMATCHED,false),
-//        Card(9,frontImages.AVATAR9,backImages.UNMATCHED,false),
-//        Card(10,frontImages.AVATAR10,backImages.UNMATCHED,false),
-//        Card(11,frontImages.AVATAR11,backImages.UNMATCHED,false),
-//        Card(12,frontImages.AVATAR12,backImages.UNMATCHED,false),
-//        Card(13,frontImages.AVATAR13,backImages.UNMATCHED,false),
-//        Card(14,frontImages.AVATAR14,backImages.UNMATCHED,false),
-//        Card(15,frontImages.AVATAR15,backImages.UNMATCHED,false),
-//        Card(16,frontImages.AVATAR16,backImages.UNMATCHED,false),
+        Card(3,frontImages.AVATAR3,backImages.UNMATCHED,false),
+        Card(4,frontImages.AVATAR4,backImages.UNMATCHED,false),
+        Card(5,frontImages.AVATAR5,backImages.UNMATCHED,false),
+        Card(6,frontImages.AVATAR6,backImages.UNMATCHED,false),
+        Card(7,frontImages.AVATAR7,backImages.UNMATCHED,false),
+        Card(8,frontImages.AVATAR8,backImages.UNMATCHED,false),
+        Card(9,frontImages.AVATAR9,backImages.UNMATCHED,false),
+        Card(10,frontImages.AVATAR10,backImages.UNMATCHED,false),
+        Card(11,frontImages.AVATAR11,backImages.UNMATCHED,false),
+        Card(12,frontImages.AVATAR12,backImages.UNMATCHED,false),
+        Card(13,frontImages.AVATAR13,backImages.UNMATCHED,false),
+        Card(14,frontImages.AVATAR14,backImages.UNMATCHED,false),
+        Card(15,frontImages.AVATAR15,backImages.UNMATCHED,false),
+        Card(16,frontImages.AVATAR16,backImages.UNMATCHED,false),
         Card(1,frontImages.AVATAR1,backImages.UNMATCHED,false),
-        Card(2,frontImages.AVATAR2,backImages.UNMATCHED,false)//,
-//        Card(3,frontImages.AVATAR3,backImages.UNMATCHED,false),
-//        Card(4,frontImages.AVATAR4,backImages.UNMATCHED,false),
-//        Card(5,frontImages.AVATAR5,backImages.UNMATCHED,false),
-//        Card(6,frontImages.AVATAR6,backImages.UNMATCHED,false),
-//        Card(7,frontImages.AVATAR7,backImages.UNMATCHED,false),
-//        Card(8,frontImages.AVATAR8,backImages.UNMATCHED,false),
-//        Card(9,frontImages.AVATAR9,backImages.UNMATCHED,false),
-//        Card(10,frontImages.AVATAR10,backImages.UNMATCHED,false),
-//        Card(11,frontImages.AVATAR11,backImages.UNMATCHED,false),
-//        Card(12,frontImages.AVATAR12,backImages.UNMATCHED,false),
-//        Card(13,frontImages.AVATAR13,backImages.UNMATCHED,false),
-//        Card(14,frontImages.AVATAR14,backImages.UNMATCHED,false),
-//        Card(15,frontImages.AVATAR15,backImages.UNMATCHED,false),
-//        Card(16,frontImages.AVATAR16,backImages.UNMATCHED,false)
+        Card(2,frontImages.AVATAR2,backImages.UNMATCHED,false),
+        Card(3,frontImages.AVATAR3,backImages.UNMATCHED,false),
+        Card(4,frontImages.AVATAR4,backImages.UNMATCHED,false),
+        Card(5,frontImages.AVATAR5,backImages.UNMATCHED,false),
+        Card(6,frontImages.AVATAR6,backImages.UNMATCHED,false),
+        Card(7,frontImages.AVATAR7,backImages.UNMATCHED,false),
+        Card(8,frontImages.AVATAR8,backImages.UNMATCHED,false),
+        Card(9,frontImages.AVATAR9,backImages.UNMATCHED,false),
+        Card(10,frontImages.AVATAR10,backImages.UNMATCHED,false),
+        Card(11,frontImages.AVATAR11,backImages.UNMATCHED,false),
+        Card(12,frontImages.AVATAR12,backImages.UNMATCHED,false),
+        Card(13,frontImages.AVATAR13,backImages.UNMATCHED,false),
+        Card(14,frontImages.AVATAR14,backImages.UNMATCHED,false),
+        Card(15,frontImages.AVATAR15,backImages.UNMATCHED,false),
+        Card(16,frontImages.AVATAR16,backImages.UNMATCHED,false)
         )
     }
 
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
 
-        val manager = GridLayoutManager(this, 2)
+        val manager = GridLayoutManager(this, 4)
 
         recyclerView.layoutManager = manager
 

@@ -10,11 +10,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
 import androidx.recyclerview.widget.RecyclerView
 
+var dontListen :Boolean =false
 class CardBoardAdapter(
     val list: List<Card>
 ) : RecyclerView.Adapter<CardBoardAdapter.ViewHolder>() {
     var firstMove: Boolean = true
-lateinit    var lastCardHolder: ViewHolder
+    lateinit    var lastCardHolder: ViewHolder
     var lastCardPostion: Int = 0
     var lastCard: Card?=null
 
@@ -35,7 +36,11 @@ lateinit    var lastCardHolder: ViewHolder
         setImage(holder, position)
         holder.itemView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                checkMove(holder, position)
+//                if (!this@CardBoardAdapter.dontListen!!) {
+//                    dontListen=true
+                    checkMove(holder, position)
+//                    dontListen=false
+//                }
             }
         })
     }
@@ -64,27 +69,33 @@ lateinit    var lastCardHolder: ViewHolder
     }
 
     private fun checkMove(holder: ViewHolder, position: Int) {
-        if (list[position].clickable) {
-            flipCard(holder, position)
-            if (firstMove) {
-                list[position].clickable=false
-                lastCardHolder = holder
-                lastCardPostion = position
-                lastCard=list[position]
-            } else {
-                if (list[position].key == lastCard?.key) {
+        if (dontListen != true) {
+            if (list[position].clickable) {
+                flipCard(holder, position)
+                if (firstMove) {
                     list[position].clickable = false
+                    lastCardHolder = holder
+                    lastCardPostion = position
+                    lastCard = list[position]
                 } else {
-                    list[position].clickable = true
-                    lastCard?.clickable = true
-                    val handler = Handler()
-                    handler.postDelayed( {
-                        flipCard(holder, position)
-                        flipCard(lastCardHolder, lastCardPostion)
-                    },3000)
+                    holder.itemView.isClickable = false
+                    if (list[position].key == lastCard?.key) {
+                        list[position].clickable = false
+                    } else {
+                        dontListen=true
+                        list[position].clickable = true
+                        lastCard?.clickable = true
+                        val handler = Handler()
+                        handler.postDelayed({
+                            flipCard(holder, position)
+                            flipCard(lastCardHolder, lastCardPostion)
+                            holder.itemView.isClickable = true
+                            dontListen=false
+                        }, 3000)
+                    }
                 }
+                firstMove = !firstMove
             }
-            firstMove = !firstMove
         }
     }
 
@@ -106,11 +117,11 @@ lateinit    var lastCardHolder: ViewHolder
         init {
             cardImageView = itemView.findViewById(R.id.card_image)
         }
+
    fun test(){
        val handler = Handler()
                handler.postDelayed({
                }, 350)
            }
-
     }
 }
