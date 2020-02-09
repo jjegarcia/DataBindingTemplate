@@ -36,11 +36,7 @@ class CardBoardAdapter(
         setImage(holder, position)
         holder.itemView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-//                if (!this@CardBoardAdapter.dontListen!!) {
-//                    dontListen=true
                     checkMove(holder, position)
-//                    dontListen=false
-//                }
             }
         })
     }
@@ -69,7 +65,7 @@ class CardBoardAdapter(
     }
 
     private fun checkMove(holder: ViewHolder, position: Int) {
-        if (dontListen != true) {
+        if (!dontListen) {
             if (list[position].clickable) {
                 flipCard(holder, position)
                 if (firstMove) {
