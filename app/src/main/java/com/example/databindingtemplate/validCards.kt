@@ -1,21 +1,30 @@
 package com.example.databindingtemplate
 
-enum class validCards(val cardName: Card) {
-
-    E1   (Card(1,frontImages.AVATAR1,backImages.UNMATCHED,false)),
-    E2   (Card(2,frontImages.AVATAR2,backImages.UNMATCHED,false)),
-    E3   (Card(3,frontImages.AVATAR3,backImages.UNMATCHED,false)),
-    E4   (Card(4,frontImages.AVATAR4,backImages.UNMATCHED,false)),
-    E5   (Card(5,frontImages.AVATAR5,backImages.UNMATCHED,false)),
-    E6   (Card(6,frontImages.AVATAR6,backImages.UNMATCHED,false)),
-    E7   (Card(7,frontImages.AVATAR7,backImages.UNMATCHED,false)),
-    E8   (Card(8,frontImages.AVATAR8,backImages.UNMATCHED,false)),
-    E9   (Card(9,frontImages.AVATAR9,backImages.UNMATCHED,false)),
-    E10   (Card(10,frontImages.AVATAR10,backImages.UNMATCHED,false)),
-    E11   (Card(11,frontImages.AVATAR11,backImages.UNMATCHED,false)),
-    E12   (Card(12,frontImages.AVATAR12,backImages.UNMATCHED,false)),
-    E13   (Card(13,frontImages.AVATAR13,backImages.UNMATCHED,false)),
-    E14   (Card(14,frontImages.AVATAR14,backImages.UNMATCHED,false)),
-    E15   (Card(15,frontImages.AVATAR15,backImages.UNMATCHED,false)),
-    E16   (Card(16,frontImages.AVATAR16,backImages.UNMATCHED,false))
+enum class ValidCards(
+    val key: Int,
+    val frontImage: Int,
+    val backImage: Int
+) {
+    E1   (1,  R.drawable.avatar_1_raster,  R.drawable.ic_launcher_foreground),
+    E2   (2,  R.drawable.avatar_2_raster,  R.drawable.ic_launcher_foreground),
+    E3   (3,  R.drawable.avatar_3_raster,  R.drawable.ic_launcher_foreground),
+    E4   (4,  R.drawable.avatar_4_raster,  R.drawable.ic_launcher_foreground),
+    E5   (5,  R.drawable.avatar_5_raster,  R.drawable.ic_launcher_foreground),
+    E6   (6,  R.drawable.avatar_6_raster,  R.drawable.ic_launcher_foreground),
+    E7   (7,  R.drawable.avatar_7_raster,  R.drawable.ic_launcher_foreground),
+    E8   (8,  R.drawable.avatar_8_raster,  R.drawable.ic_launcher_foreground),
+    E9   (9,  R.drawable.avatar_9_raster,  R.drawable.ic_launcher_foreground),
+    E10   (10,R.drawable.avatar_10_raster, R.drawable.ic_launcher_foreground),
+    E11   (11,R.drawable.avatar_11_raster, R.drawable.ic_launcher_foreground),
+    E12   (12,R.drawable.avatar_12_raster, R.drawable.ic_launcher_foreground),
+    E13   (13,R.drawable.avatar_13_raster, R.drawable.ic_launcher_foreground),
+    E14   (14,R.drawable.avatar_14_raster, R.drawable.ic_launcher_foreground),
+    E15   (15,R.drawable.avatar_15_raster, R.drawable.ic_launcher_foreground),
+    E16   (16,R.drawable.avatar_16_raster, R.drawable.ic_launcher_foreground)
 }
+
+data class Card constructor(
+    var cardtype: ValidCards,
+    var flipped: Boolean  =false,
+    var clickable: Boolean=true
+)

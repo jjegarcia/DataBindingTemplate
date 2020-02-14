@@ -2,6 +2,7 @@ package com.example.databindingtemplate
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Transformations.map
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -11,52 +12,18 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        val initialCardsList = createList()
+        val initialCardsList = mutableListOf<Card>()
 
-        val cardList=initialCardsList//.shuffled()
+        initialCardsList.addAll(addSingleDeck())
+        initialCardsList.addAll(addSingleDeck())
 
-//        val newBoard = Board(cardList)
-        buildBoard(cardList)
+        val cardList=initialCardsList
 
+      buildBoard(cardList)
 
     }
 
-    fun createList(): List<Card> {
-        return listOf<Card>(
-        Card(1,frontImages.AVATAR1,backImages.UNMATCHED,false),
-        Card(2,frontImages.AVATAR2,backImages.UNMATCHED,false),
-        Card(3,frontImages.AVATAR3,backImages.UNMATCHED,false),
-        Card(4,frontImages.AVATAR4,backImages.UNMATCHED,false),
-        Card(5,frontImages.AVATAR5,backImages.UNMATCHED,false),
-        Card(6,frontImages.AVATAR6,backImages.UNMATCHED,false),
-        Card(7,frontImages.AVATAR7,backImages.UNMATCHED,false),
-        Card(8,frontImages.AVATAR8,backImages.UNMATCHED,false),
-        Card(9,frontImages.AVATAR9,backImages.UNMATCHED,false),
-        Card(10,frontImages.AVATAR10,backImages.UNMATCHED,false),
-        Card(11,frontImages.AVATAR11,backImages.UNMATCHED,false),
-        Card(12,frontImages.AVATAR12,backImages.UNMATCHED,false),
-        Card(13,frontImages.AVATAR13,backImages.UNMATCHED,false),
-        Card(14,frontImages.AVATAR14,backImages.UNMATCHED,false),
-        Card(15,frontImages.AVATAR15,backImages.UNMATCHED,false),
-        Card(16,frontImages.AVATAR16,backImages.UNMATCHED,false),
-        Card(1,frontImages.AVATAR1,backImages.UNMATCHED,false),
-        Card(2,frontImages.AVATAR2,backImages.UNMATCHED,false),
-        Card(3,frontImages.AVATAR3,backImages.UNMATCHED,false),
-        Card(4,frontImages.AVATAR4,backImages.UNMATCHED,false),
-        Card(5,frontImages.AVATAR5,backImages.UNMATCHED,false),
-        Card(6,frontImages.AVATAR6,backImages.UNMATCHED,false),
-        Card(7,frontImages.AVATAR7,backImages.UNMATCHED,false),
-        Card(8,frontImages.AVATAR8,backImages.UNMATCHED,false),
-        Card(9,frontImages.AVATAR9,backImages.UNMATCHED,false),
-        Card(10,frontImages.AVATAR10,backImages.UNMATCHED,false),
-        Card(11,frontImages.AVATAR11,backImages.UNMATCHED,false),
-        Card(12,frontImages.AVATAR12,backImages.UNMATCHED,false),
-        Card(13,frontImages.AVATAR13,backImages.UNMATCHED,false),
-        Card(14,frontImages.AVATAR14,backImages.UNMATCHED,false),
-        Card(15,frontImages.AVATAR15,backImages.UNMATCHED,false),
-        Card(16,frontImages.AVATAR16,backImages.UNMATCHED,false)
-        )
-    }
+    private fun addSingleDeck(): List<Card>  = ValidCards.values().map { Card(it, flipped = false, clickable = true) }
 
     private fun buildBoard(cardList: List<Card>) {
         val adapter = CardBoardAdapter(cardList)
@@ -68,8 +35,6 @@ class MainActivity : AppCompatActivity() {
         val manager = GridLayoutManager(this, 4)
 
         recyclerView.layoutManager = manager
-
-
            adapter.setData()
     }
 

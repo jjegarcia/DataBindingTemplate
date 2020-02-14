@@ -42,7 +42,7 @@ class CardBoardAdapter(
     }
 
     private fun flipCard(holder: ViewHolder, position: Int) {
-        Log.i("VS", "Card " + list[position].key)
+        Log.i("VS", "Card " + list[position].cardtype.key)
         val apply = holder.cardImageView.apply {
             setImageDrawable(
                 ContextCompat.getDrawable(
@@ -58,9 +58,9 @@ class CardBoardAdapter(
         val imageFlipped = list[position].flipped
         list[position].flipped = !imageFlipped
         if (imageFlipped)
-            flipImage = list[position].backImage.imageNumber
+            flipImage = list[position].cardtype.backImage
         else
-            flipImage = list[position].frontImage.imageNumber
+            flipImage = list[position].cardtype.frontImage
         return flipImage
     }
 
@@ -75,7 +75,7 @@ class CardBoardAdapter(
                     lastCard = list[position]
                 } else {
                     holder.itemView.isClickable = false
-                    if (list[position].key == lastCard?.key) {
+                    if (list[position].cardtype.key == lastCard?.cardtype?.key) {
                         list[position].clickable = false
                     } else {
                         dontListen=true
@@ -100,7 +100,7 @@ class CardBoardAdapter(
             setImageDrawable(
                 ContextCompat.getDrawable(
                     holder.cardImageView.context,
-                    list[position].backImage.imageNumber
+                    list[position].cardtype.backImage
                 )
             )
         }
@@ -113,11 +113,5 @@ class CardBoardAdapter(
         init {
             cardImageView = itemView.findViewById(R.id.card_image)
         }
-
-   fun test(){
-       val handler = Handler()
-               handler.postDelayed({
-               }, 350)
-           }
     }
 }
