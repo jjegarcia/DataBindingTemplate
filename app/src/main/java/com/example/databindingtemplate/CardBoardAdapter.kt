@@ -67,9 +67,7 @@ class CardBoardAdapter constructor(
         handleSingleClick(position, holder)
     }
 
-    private fun handleSingleClick(position: Int,
-        holder: ViewHolder
-    ) {
+    private fun handleSingleClick(position: Int, holder: ViewHolder) {
         if (!dontListen) {
             if (list[position].clickable) {
                 handleClickableCard(holder, position)
@@ -77,10 +75,7 @@ class CardBoardAdapter constructor(
         }
     }
 
-    private fun handleClickableCard(
-        holder: ViewHolder,
-        position: Int
-    ) {
+    private fun handleClickableCard(holder: ViewHolder, position: Int ) {
         flipCard(holder, position)
         handleLifts(position, holder)
         firstMove = !firstMove
@@ -91,25 +86,23 @@ class CardBoardAdapter constructor(
         else handleSecondLift(holder, position)
     }
 
-    private fun handleSecondLift(
-        holder: ViewHolder,
-        position: Int
-    ) {
+    private fun handleSecondLift(holder: ViewHolder, position: Int) {
         holder.itemView.isClickable = false
-        if (list[position].cardtype.key == lastCard?.cardtype?.key) {
-            list[position].clickable = false
-        } else {
-            dontListen = true
-            list[position].clickable = true
-            lastCard?.clickable = true
-            val handler = Handler()
-            handler.postDelayed({
-                flipCard(holder, position)
-                flipCard(lastCardHolder, lastCardPostion)
-                holder.itemView.isClickable = true
-                dontListen = false
-            }, 3000)
-        }
+        if (list[position].cardtype.key == lastCard?.cardtype?.key) list[position].clickable = false
+         else reverseCard(position, holder)
+    }
+
+    private fun reverseCard(position: Int, holder: ViewHolder) {
+        dontListen = true
+        list[position].clickable = true
+        lastCard?.clickable = true
+        val handler = Handler()
+        handler.postDelayed({
+            flipCard(holder, position)
+            flipCard(lastCardHolder, lastCardPostion)
+            holder.itemView.isClickable = true
+            dontListen = false
+        }, 3000)
     }
 
     private fun handleFirstLift(position: Int, holder: ViewHolder) {
