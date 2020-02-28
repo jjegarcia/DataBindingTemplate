@@ -7,11 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import androidx.core.os.postDelayed
 import androidx.recyclerview.widget.RecyclerView
 
 var dontListen :Boolean =false
-class CardBoardAdapter(
+class CardBoardAdapter constructor(
     val list: List<Card>
 ) : RecyclerView.Adapter<CardBoardAdapter.ViewHolder>() {
     var firstMove: Boolean = true
@@ -65,34 +64,59 @@ class CardBoardAdapter(
     }
 
     private fun checkMove(holder: ViewHolder, position: Int) {
+        handleSingleClick(position, holder)
+    }
+
+    private fun handleSingleClick(position: Int,
+        holder: ViewHolder
+    ) {
         if (!dontListen) {
             if (list[position].clickable) {
-                flipCard(holder, position)
-                if (firstMove) {
-                    list[position].clickable = false
-                    lastCardHolder = holder
-                    lastCardPostion = position
-                    lastCard = list[position]
-                } else {
-                    holder.itemView.isClickable = false
-                    if (list[position].cardtype.key == lastCard?.cardtype?.key) {
-                        list[position].clickable = false
-                    } else {
-                        dontListen=true
-                        list[position].clickable = true
-                        lastCard?.clickable = true
-                        val handler = Handler()
-                        handler.postDelayed({
-                            flipCard(holder, position)
-                            flipCard(lastCardHolder, lastCardPostion)
-                            holder.itemView.isClickable = true
-                            dontListen=false
-                        }, 3000)
-                    }
-                }
-                firstMove = !firstMove
+                handleClickableCard(holder, position)
             }
         }
+    }
+
+    private fun handleClickableCard(
+        holder: ViewHolder,
+        position: Int
+    ) {
+        flipCard(holder, position)
+        handleLifts(position, holder)
+        firstMove = !firstMove
+    }
+
+    private fun handleLifts(position: Int, holder: ViewHolder) {
+        if (firstMove) handleFirstLift(position, holder)
+        else handleSecondLift(holder, position)
+    }
+
+    private fun handleSecondLift(
+        holder: ViewHolder,
+        position: Int
+    ) {
+        holder.itemView.isClickable = false
+        if (list[position].cardtype.key == lastCard?.cardtype?.key) {
+            list[position].clickable = false
+        } else {
+            dontListen = true
+            list[position].clickable = true
+            lastCard?.clickable = true
+            val handler = Handler()
+            handler.postDelayed({
+                flipCard(holder, position)
+                flipCard(lastCardHolder, lastCardPostion)
+                holder.itemView.isClickable = true
+                dontListen = false
+            }, 3000)
+        }
+    }
+
+    private fun handleFirstLift(position: Int, holder: ViewHolder) {
+        list[position].clickable = false
+        lastCardHolder = holder
+        lastCardPostion = position
+        lastCard = list[position]
     }
 
     private fun setImage(holder: ViewHolder, position: Int) {
