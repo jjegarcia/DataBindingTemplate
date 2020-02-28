@@ -40,29 +40,6 @@ class CardBoardAdapter constructor(
         })
     }
 
-    private fun flipCard(holder: ViewHolder, position: Int) {
-        Log.i("VS", "Card " + list[position].cardtype.key)
-        val apply = holder.cardImageView.apply {
-            setImageDrawable(
-                ContextCompat.getDrawable(
-                    holder.cardImageView.context,
-                    flip(position)
-                )
-            )
-        }
-    }
-
-    private fun flip(position: Int): Int {
-        val flipImage: Int
-        val imageFlipped = list[position].flipped
-        list[position].flipped = !imageFlipped
-        if (imageFlipped)
-            flipImage = list[position].cardtype.backImage
-        else
-            flipImage = list[position].cardtype.frontImage
-        return flipImage
-    }
-
     private fun checkMove(holder: ViewHolder, position: Int) {
         handleSingleClick(position, holder)
     }
@@ -90,6 +67,13 @@ class CardBoardAdapter constructor(
          else reverseCard(position, holder)
     }
 
+    private fun handleFirstLift(position: Int, holder: ViewHolder) {
+        list[position].clickable = false
+        lastCardHolder = holder
+        lastCardPostion = position
+        lastCard = list[position]
+    }
+
     private fun reverseCard(position: Int, holder: ViewHolder) {
         dontListen = true
         list[position].clickable = true
@@ -103,11 +87,27 @@ class CardBoardAdapter constructor(
         }, 3000)
     }
 
-    private fun handleFirstLift(position: Int, holder: ViewHolder) {
-        list[position].clickable = false
-        lastCardHolder = holder
-        lastCardPostion = position
-        lastCard = list[position]
+    private fun flipCard(holder: ViewHolder, position: Int) {
+        Log.i("VS", "Card " + list[position].cardtype.key)
+        val apply = holder.cardImageView.apply {
+            setImageDrawable(
+                ContextCompat.getDrawable(
+                    holder.cardImageView.context,
+                    flip(position)
+                )
+            )
+        }
+    }
+
+    private fun flip(position: Int): Int {
+        val flipImage: Int
+        val imageFlipped = list[position].flipped
+        list[position].flipped = !imageFlipped
+        if (imageFlipped)
+            flipImage = list[position].cardtype.backImage
+        else
+            flipImage = list[position].cardtype.frontImage
+        return flipImage
     }
 
     private fun setImage(holder: ViewHolder, position: Int) {
@@ -122,7 +122,6 @@ class CardBoardAdapter constructor(
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         val cardImageView: ImageView
 
         init {
