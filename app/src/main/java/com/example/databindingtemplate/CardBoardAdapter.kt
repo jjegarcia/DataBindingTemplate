@@ -69,9 +69,7 @@ class CardBoardAdapter constructor(
 
     private fun handleSingleClick(position: Int, holder: ViewHolder) {
         if (!dontListen) {
-            if (list[position].clickable) {
-                handleClickableCard(holder, position)
-            }
+            if (list[position].clickable) handleClickableCard(holder, position)
         }
     }
 
